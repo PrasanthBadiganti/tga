@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUN_UNIT_TESTS', defaultValue: true, description: 'Run unit tests?')
-        booleanParam(name: 'RUN_SONAR_ANALYSIS', defaultValue: true, description: 'Run Sonar analysis?')
-        booleanParam(name: 'PUBLISH_DOCS', defaultValue: true, description: 'Publish documentation to DocHub?')
+        booleanParam(name: 'RUN_UNIT_TESTS', defaultValue: false, description: 'Run Unit tests?')
+        booleanParam(name: 'RUN_SONAR_ANALYSIS', defaultValue: false, description: 'Run Sonar analysis?')
+        booleanParam(name: 'PUBLISH_DOCS', defaultValue: false, description: 'Publish documentation to DocHub?')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your/repository.git'
+                git 'https://github.com/PrasanthBadiganti/tga.git'
             }
         }
 
@@ -54,34 +54,23 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    docker.build("your_docker_image_name", "-f Dockerfile .")
+                    docker.build("tga_assessment", "-f Dockerfile .")
 
                     // Push Docker image to Artifactory
                     docker.withRegistry('https://your_artifactory_registry_url', 'your_artifactory_credentials') {
-                        docker.image("your_docker_image_name").push()
+                        docker.image("tga_assessment").push()
                     }
                 }
             }
         }
 
-
-
         stage('Deploy') {
             steps {
                 // Run Docker container from the image in your environment
                 script {
-                    sh 'docker run -d -p 8080:8000 your_docker_image_name:latest'
+                    sh 'docker run -d -p 8080:8000 tga_assessment:latest'
                 }
             }
-        }
-    }
-
-    post {
-        success {
-            // Actions on success
-        }
-        failure {
-            // Actions on failure
         }
     }
 }
