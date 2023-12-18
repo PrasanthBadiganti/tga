@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+fastapi_limiter
+slowapi
+expiringdict
+King
