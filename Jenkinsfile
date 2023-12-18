@@ -55,11 +55,6 @@ pipeline {
                 script {
                     // Build Docker image
                     docker.build("tga_assessment:latest", "-f Dockerfile .")
-
-                    // Push Docker image to Artifactory
-                    docker.withRegistry('https://your_artifactory_registry_url', 'your_artifactory_credentials') {
-                        docker.image("tga_assessment").push()
-                    }
                 }
             }
         }
