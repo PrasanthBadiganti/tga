@@ -63,7 +63,7 @@ pipeline {
             steps {
                 // Run Docker container from the image in your environment
                 script {
-                    sh 'docker run -d -p 8080:8000 tga_assessment:latest'
+                    sh 'docker run -d -p 8001:8001 tga_assessment:latest'
                 }
             }
         }
