@@ -54,7 +54,8 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    docker.build("tga_assessment", "-f Dockerfile .")
+                    docker build -t my_fastapi_app .
+                    // docker.build("tga_assessment", "-f Dockerfile .")
                 }
             }
         }
@@ -63,7 +64,7 @@ pipeline {
             steps {
                 // Run Docker container from the image in your environment
                 script {
-                    sh 'docker run -d -p 8000:8000 tga_assessment'
+                    sh 'docker run -p 8000:8000 my_fastapi_app'
                 }
             }
         }
