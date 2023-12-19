@@ -3,3 +3,4 @@ uvicorn
 slowapi
 expiringdict
 fastapi-ratelimit==0.0.5
+prometheus-fastapi-instrumentator

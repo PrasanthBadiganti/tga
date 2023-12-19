@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -15,6 +16,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_exception_handler(Exception, global_exception_handler)
 app.add_middleware(AuthMiddleware)
 app.include_router(routers)
+Instrumentator().instrument(app).expose(app)
 
 
 @app.post("/prefilter")
