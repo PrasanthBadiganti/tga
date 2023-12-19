@@ -9,6 +9,12 @@ from src.service.user_service import UserService
 router = APIRouter(tags=["ops"], dependencies=[Depends(HTTPBearer())])
 
 
+@router.post("/prefilter")
+async def prefilter_endpoint():
+    # Your logic here
+    return {"message": "Received POST request at /prefilter"}
+
+
 @router.get("/fetch-users")
 @limiter.limit("2/minute")
 async def fetch_users(request: Request):
