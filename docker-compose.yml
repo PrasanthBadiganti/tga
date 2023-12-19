@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  fastapi-app:
+  fastapi_application:
     build:
       context: .
       dockerfile: Dockerfile  # Path to your FastAPI Dockerfile
