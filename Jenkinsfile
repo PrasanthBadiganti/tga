@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t my_fastapi_app .'
+                    sh 'docker build -t fastapi-app .'
                 }
             }
         }
@@ -63,7 +63,8 @@ pipeline {
             steps {
                 // Run Docker container from the image in your environment
                 script {
-                    sh 'docker run -p 8000:8000 my_fastapi_app'
+                //   sh 'docker run -p 8000:8000 my_fastapi_app'
+                    sh 'docker-compose up'
                 }
             }
         }
