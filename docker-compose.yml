@@ -21,7 +21,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     depends_on:
-      - fastapi-app
+      - fastapi_application
 
   grafana:
     image: grafana/grafana:8.3.3
