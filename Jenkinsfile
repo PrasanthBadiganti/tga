@@ -64,7 +64,7 @@ pipeline {
                 // Run Docker container from the image in your environment
                 script {
                 //   sh 'docker run -p 8000:8000 my_fastapi_app'
-                    sh 'docker-compose up'
+                    sh 'docker-compose up -d'
                 }
             }
         }
