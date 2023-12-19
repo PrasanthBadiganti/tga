@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-fastapi_limiter
 slowapi
 expiringdict
-King
+fastapi-ratelimit==0.0.5

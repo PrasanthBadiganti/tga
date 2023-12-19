@@ -16,4 +16,4 @@ app.add_exception_handler(Exception, global_exception_handler)
 app.add_middleware(AuthMiddleware)
 app.include_router(routers)
 if __name__ == '__main__':
-    uvicorn.run(app, host='localhost', port=8080)
+    uvicorn.run(app, host='localhost', port=8000)
