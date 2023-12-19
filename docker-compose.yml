@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Path to your FastAPI Dockerfile
+    ports:
+      - "8000:8000"  # Port mapping for FastAPI
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:v2.33.1
+    ports:
+      - "9090:9090"  # Port for Prometheus UI
+    volumes:
+      - ./prometheus:/etc/prometheus
+    networks:
+      - monitoring
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    depends_on:
+      - fastapi-app
+
+  grafana:
+    image: grafana/grafana:8.3.3
+    ports:
+      - "3000:3000"  # Port for Grafana UI
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+
+networks:
+  monitoring:
+    driver: bridge
