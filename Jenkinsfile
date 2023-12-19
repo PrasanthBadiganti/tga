@@ -55,7 +55,6 @@ pipeline {
                 script {
                     // Build Docker image
                     sh 'docker build -t my_fastapi_app .'
-                    // docker.build("tga_assessment", "-f Dockerfile .")
                 }
             }
         }
