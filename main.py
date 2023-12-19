@@ -15,5 +15,13 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_exception_handler(Exception, global_exception_handler)
 app.add_middleware(AuthMiddleware)
 app.include_router(routers)
+
+
+@app.post("/prefilter")
+async def prefilter_endpoint():
+    # Your logic here
+    return {"message": "Received POST request at /prefilter"}
+
+
 if __name__ == '__main__':
     uvicorn.run(app, host='localhost', port=8000)
