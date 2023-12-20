@@ -1,3 +1,5 @@
+import time
+
 from expiringdict import ExpiringDict
 from fastapi import Request, Response
 from starlette.responses import JSONResponse
@@ -20,6 +22,8 @@ def get_privileges_from_wal(token):
     # 1 Decode token using hantweb key
     # 2 Obtain username from the claims
     # 3 Get respective privileges from WAL by passing the username.
+    # Considering 3 secs for authorizing the request
+    time.sleep(3)
     return PRIVILEGES_DICT.get(token)
 
 
