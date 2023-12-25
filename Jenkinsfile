@@ -39,56 +39,59 @@ pipeline {
                 }
             }
         }
-
-        stage('Build and Publish Docs') {
-            when {
-                expression { params.PUBLISH_DOCS == true }
+        parallel {
+            stage('Build and Publish Docs') {
+                when {
+                    expression { params.PUBLISH_DOCS == true }
+                }
+                steps {
+                    script {
+                        // Publish documentation to DocHub
+                        // sh 'dochub publish'  // Replace with your DocHub publish command
+                        sleep time: 96, unit: 'SECONDS'
+                    }
+                }
             }
-            steps {
-                script {
-                    // Publish documentation to DocHub
-                    // sh 'dochub publish'  // Replace with your DocHub publish command
-                    sleep time: 96, unit: 'SECONDS'
+
+            stage('Sonar Analysis') {
+                when {
+                    expression { params.RUN_SONAR_ANALYSIS == true }
+                }
+                steps {
+                    script {
+                        // Run Sonar analysis commands
+                        sleep time: 129, unit: 'SECONDS'
+                        // sh 'sonar-scanner'  // Replace with your Sonar scanner command
+                    }
                 }
             }
         }
 
-        stage('Sonar Analysis') {
-            when {
-                expression { params.RUN_SONAR_ANALYSIS == true }
-            }
-            steps {
-                script {
-                    // Run Sonar analysis commands
-                    sleep time: 129, unit: 'SECONDS'
-                    // sh 'sonar-scanner'  // Replace with your Sonar scanner command
+        parallel {
+            stage('AWS Test Deploy') {
+                when {
+                    expression { params.TEST_DEPLOY == true }
+                }
+                steps {
+                    // Run Docker container from the image in your environment
+                    script {
+                    //   sh 'docker run -p 8000:8000 my_fastapi_app'
+                    sh 'docker-compose up -d'
+                    sleep time: 328, unit: 'SECONDS'
+                    }
                 }
             }
-        }
 
-        stage('AWS Test Deploy') {
-            when {
-                expression { params.TEST_DEPLOY == true }
-            }
-            steps {
-                // Run Docker container from the image in your environment
-                script {
-                //   sh 'docker run -p 8000:8000 my_fastapi_app'
-                sh 'docker-compose up -d'
-                sleep time: 328, unit: 'SECONDS'
+            stage('AWS Stage Deploy') {
+                when {
+                    expression { params.STAGE_DEPLOY == true }
                 }
-            }
-        }
-
-        stage('AWS Stage Deploy') {
-            when {
-                expression { params.STAGE_DEPLOY == true }
-            }
-            steps {
-                // Run Docker container from the image in your environment
-                script {
-                    sleep time: 336, unit: 'SECONDS'
-                    //sh 'docker-compose up -d'
+                steps {
+                    // Run Docker container from the image in your environment
+                    script {
+                        sleep time: 336, unit: 'SECONDS'
+                        //sh 'docker-compose up -d'
+                    }
                 }
             }
         }
