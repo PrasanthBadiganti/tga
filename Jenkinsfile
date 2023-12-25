@@ -39,9 +39,8 @@ pipeline {
                 }
             }
         }
-        stage('Parallel Tasks') {
-            parallel {
-                stage('Build and Publish Docs') {
+
+		stage('Build and Publish Docs') {
                     when {
                         expression { params.PUBLISH_DOCS == true }
                     }
@@ -66,10 +65,7 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-        stage('Parallel Build') {
-            parallel {
+
                 stage('AWS Test Deploy') {
                     when {
                         expression { params.TEST_DEPLOY == true }
@@ -96,8 +92,7 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
+
     }
 }
 
