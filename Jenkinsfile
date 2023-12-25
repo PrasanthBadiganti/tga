@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUN_UNIT_TESTS', defaultValue: false, description: 'Run Unit tests?')
-        booleanParam(name: 'RUN_SONAR_ANALYSIS', defaultValue: false, description: 'Run Sonar analysis?')
-        booleanParam(name: 'PUBLISH_DOCS', defaultValue: false, description: 'Publish documentation to DocHub?')
-        booleanParam(name: 'TEST_DEPLOY', defaultValue: false, description: 'Deploy in test env?')
-        booleanParam(name: 'STAGE_DEPLOY', defaultValue: false, description: 'Deploy in stage env?')
+        booleanParam(name: 'RUN_UNIT_TESTS', defaultValue: true, description: 'Run Unit tests?')
+        booleanParam(name: 'RUN_SONAR_ANALYSIS', defaultValue: true, description: 'Run Sonar analysis?')
+        booleanParam(name: 'PUBLISH_DOCS', defaultValue: true, description: 'Publish documentation to DocHub?')
+        booleanParam(name: 'TEST_DEPLOY', defaultValue: true, description: 'Deploy in test env?')
+        booleanParam(name: 'STAGE_DEPLOY', defaultValue: true, description: 'Deploy in stage env?')
     }
 
     stages {
