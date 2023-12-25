@@ -35,6 +35,7 @@ pipeline {
                 script {
                     // Build Docker image
                     sh 'docker build -t fastapi_application .'
+                    sleep time: 84, unit: 'SECONDS'
                 }
             }
         }
