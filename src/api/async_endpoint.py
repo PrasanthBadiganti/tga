@@ -9,7 +9,6 @@ from prometheus_client import Counter
 from starlette.responses import JSONResponse
 
 from src.service.async_service import AsyncService
-from src.service.user_service import UserService
 
 async_vs_sync_router = APIRouter(tags=["async_vs_sync"], dependencies=[Depends(HTTPBearer())])
 
