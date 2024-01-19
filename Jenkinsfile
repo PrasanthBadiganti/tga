@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Run unit tests based on your testing framework
-                    sleep time: 125, unit: 'SECONDS'
+                    // sleep time: 125, unit: 'SECONDS'
                     //sh 'python -m unittest discover -s tests -p "*_test.py"'
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     // Build Docker image
                     sh 'docker build -t fastapi_application .'
-                    sleep time: 84, unit: 'SECONDS'
+                    //sleep time: 84, unit: 'SECONDS'
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
                         script {
                             // Publish documentation to DocHub
                             // sh 'dochub publish'  // Replace with your DocHub publish command
-                            sleep time: 96, unit: 'SECONDS'
+                            //sleep time: 96, unit: 'SECONDS'
                         }
                     }
                 }
@@ -61,7 +61,7 @@ pipeline {
                     steps {
                         script {
                             // Run Sonar analysis commands
-                            sleep time: 129, unit: 'SECONDS'
+                            //sleep time: 129, unit: 'SECONDS'
                             // sh 'sonar-scanner'  // Replace with your Sonar scanner command
                         }
                     }
@@ -79,7 +79,7 @@ pipeline {
                         script {
                         //   sh 'docker run -p 8000:8000 my_fastapi_app'
                         sh 'docker-compose up -d'
-                        sleep time: 328, unit: 'SECONDS'
+                        //sleep time: 328, unit: 'SECONDS'
                         }
                     }
                 }
@@ -91,7 +91,7 @@ pipeline {
                     steps {
                         // Run Docker container from the image in your environment
                         script {
-                            sleep time: 336, unit: 'SECONDS'
+                            //sleep time: 336, unit: 'SECONDS'
                             //sh 'docker-compose up -d'
                         }
                     }
